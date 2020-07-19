@@ -55,13 +55,16 @@
 
 
 
-.btn-babypink {
+.btn.btn-babypink {
   background-color: #292929;
   color: #af412b;
+  outline: none !important;
 }
 
-.btn-babypink:hover,
-.btn-babypink:active {
+.btn.btn-babypink:hover,
+.btn.btn-babypink:focus,
+.btn.btn-babypink:active {
   background-color: #222222;
   color: #d14023;
+  outline: none !important;
 }

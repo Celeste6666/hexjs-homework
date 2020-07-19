@@ -6,7 +6,6 @@ const app = new Vue({
     uuid: '8ef975e4-f1b6-4328-932c-fe911c580ec7',
     token: '',
     products: [],
-
     paginations: {}
   },
   methods: {
@@ -54,6 +53,9 @@ const app = new Vue({
       const vm = this;
       axios.defaults.headers.common['Authorization'] = `Bearer ${vm.token}`
       axios.delete(productPath).then(res => vm.$bus.$emit('sendProdutData', vm.products)).catch(error => console.log(error))
+    },
+    signout() {
+      document.cookie = `CelesteToken=; expires=; path=/`;
     }
   },
   created() {
