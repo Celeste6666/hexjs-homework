@@ -1,0 +1,67 @@
+.logIn {
+  width: 100%;
+  height: 100vh;
+  background-image: url(https://images.unsplash.com/photo-1512207846876-bb54ef5056fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+  background-size: cover;
+  background-position: center center;
+}
+
+.logIn_area {
+  width: 400px;
+  height: 300px;
+  background-color: #bbafb3bb;
+  color: #af412b;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.user {
+  position: relative;
+}
+
+.user input {
+  color: #292929;
+  border-bottom: 1px solid #292929 !important;
+  font-size: 18px;
+  padding: 5px 0 0;
+}
+
+.user input:focus {
+  outline: none !important;
+}
+
+.user label {
+  color: #292929;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 18px;
+  transition: .5s;
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  -ms-transition: .5s;
+  -o-transition: .5s;
+}
+
+.user input:focus+label,
+.user input:valid+label {
+  top: -20px;
+  color: #af412b;
+  font-size: 12px;
+}
+
+
+
+.btn-babypink {
+  background-color: #292929;
+  color: #af412b;
+}
+
+.btn-babypink:hover,
+.btn-babypink:active {
+  background-color: #222222;
+  color: #d14023;
+}

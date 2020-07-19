@@ -1,0 +1,84 @@
+* {
+  font-family: 'Courgette', cursive;
+}
+
+.container-fluid {
+  max-width: 960px;
+}
+
+h1 {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 60px !important;
+}
+.clearall{
+  font-size: 25px;
+}
+.focusmatrix {
+  max-width: 850px;
+}
+
+.focusmatrix_area {
+  min-width: 400px;
+  min-height: 400px;
+}
+
+.important_Urgent {
+  border: 2px solid #ee7363;
+  background-color: #ffebe4;
+}
+
+.important_Urgent_title {
+  background-color: #ee7363;
+}
+
+.important_NotUrgent {
+  border: 2px solid #46c083;
+  background-color: #ecf8e5;
+}
+
+.important_NotUrgent_title {
+  background-color: #46c083;
+}
+
+.NotImportant_Urgent {
+  border: 2px solid #2dc1cc;
+  background-color: #e2f2ff;
+}
+
+.NotImportant_Urgent_title {
+  background-color: #2dc1cc;
+}
+
+.NotImportant_NotUrgent {
+  border: 2px solid #ada283;
+  background-color: #faf3e2
+}
+
+.NotImportant_NotUrgent_title {
+  background-color: #ada283;
+}
+
+.blog:hover {
+  color: rgb(98, 241, 194) !important;
+}
+
+label {
+  font-size: 20px;
+}
+
+
+.checked {
+  color: #ccc;
+  text-decoration: line-through;
+  font-style: italic;
+}
+
+.form-check-input {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.badge-warning{
+  background-color: #918155 !important;
+  color: white;
+}

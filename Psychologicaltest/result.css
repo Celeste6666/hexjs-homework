@@ -1,0 +1,134 @@
+.result_banner {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.result_banner-nav {
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  z-index: 10;
+  padding: 0 20px;
+  background-color: #000000b9;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 2.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result_banner-nav .logo {
+  font-family: 'Yesteryear',
+    cursive;
+}
+
+
+.result_banner-nav ul {
+  list-style-type: none;
+  font-size: 0.45em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result_banner-nav ul a {
+  text-decoration: none;
+  height: 50px;
+  color: rgba(255, 255, 255, 0.76);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.result_banner-nav ul a:hover {
+  background-color: sienna;
+  color: rgb(255, 255, 255);
+}
+
+.result_banner-bg {
+  width: 100%;
+  height: 100vh;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  background-image: url(https://images.unsplash.com/photo-1573125716783-d05b57a86488?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+  background-size: cover;
+  background-position: center center;
+}
+
+.result_banner-info {
+  width: 400px;
+  position: absolute;
+  left: 40%;
+  top: 190px;
+  background-color: #fcfcfc85;
+}
+
+.personality_title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #edede5ec;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+}
+
+.personality_title span:nth-child(1) {
+  font-size: 2em;
+}
+
+.personality_title span:nth-child(2) {
+  font-size: 1.5em;
+}
+
+.personality_desc {
+  font-size: 1.2em;
+  padding: 10px 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.testResult {
+  width: 500px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding: 20px 10px;
+}
+
+.score {
+  align-self: start;
+}
+
+.score span {
+  font-size: 3em;
+}
+
+
+.testResult_des {
+  font-size: 1.3em;
+}
+
+.retest {
+  margin-right: 150px;
+}
+
+.addtion{
+  color: sienna;
+  margin-top: 10px;
+}
+
+.js-nav.active{
+  background-color: sienna;
+}

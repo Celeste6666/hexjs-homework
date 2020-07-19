@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五大性格特質心理測驗</title>
+  <script src="https://kit.fontawesome.com/6e47eb02e6.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="all.css">
+</head>
+
+<body>
+  <div class="banner" id="vm">
+    <div class="banner_title">
+      <div class="banner_img"></div>
+      <div class="banner_title-word">
+        <div class="banner_title-en">{{allData.name.en}}</div>
+        <h1 class="banner_title-ch">{{allData.name.zh}}</h1>
+        <p>{{allData.description}}</p>
+      </div>
+    </div>
+    <div class="banner_test">
+      <div class="banner_test_question" :class="{hidden:classList.isHidden}"><span>Q</span>{{nowProblemData.problem}}
+      </div>
+      <div class="banner_test_answer" :class="{hidden:classList.isHidden}">
+        <ul>
+          <li v-for="(option,key) in nowProblemData.options" :key="key">
+            <input type="radio" :name="nowProblemData.id" :id="option.fraction" :value="option.fraction"
+              v-model.number="score[nowProblemData.category]">
+            <label :for="option.fraction">{{option.description}}</label>
+          </li>
+        </ul>
+      </div>
+      <div class="banner_test-btn">
+        <a href="#" v-if="nowQuestionIndex===-1" :class="{hidden:classList.isTestBtnHidden}"
+          @click.prevent="nowQuestionIndex++;render(nowQuestionIndex);">開始測驗</a>
+        <a href="#" v-else-if="nowQuestionIndex===(problems.length-1)" :class="{hidden:classList.isTestBtnHidden}"
+          @click.prevent="nowQuestionIndex++;render(nowQuestionIndex)">統計分數</a>
+        <a href="result.html" v-else-if="nowQuestionIndex=== problems.length"
+          :class="{hidden:classList.isTestBtnHidden}">結束測驗</a>
+        <a href="#" @click.prevent="nowQuestionIndex++;render(nowQuestionIndex)"
+          :class="{hidden:classList.isArrowHidden}" v-show="score[nowProblemData.category]!==0">下一題</a>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="all.js"></script>
+
+
+</body>
+
+</html>

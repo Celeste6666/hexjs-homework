@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五大性格特質心理測驗</title>
+  <link rel="stylesheet" href="all.css">
+  <link rel="stylesheet" href="result.css">
+</head>
+
+<body>
+  <div id="vm">
+    <div class="result_banner">
+      <nav class="result_banner-nav">
+        <span class="logo">Celeste Website</span>
+        <ul>
+          <li v-for="(item,key) in allData.traits.zh" :key="key">
+            <a href="#" @click.prevent="renderResult(allData.traits.en[key])" class="js-nav" :class="allData.traits.en[key]">{{item}}</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="result_banner-bg"></div>
+      <div class="result_banner-info">
+        <div class="personality">
+          <div class="personality_title">
+            <span>{{resultData.name}}</span>
+            <span>{{resultCategory}}</span>
+          </div>
+          <div class="personality_desc">
+            {{resultData.description.desc}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="testResult">
+        <div class="score">
+          <span v-if="resultScore>=allData.degree.high">高</span>
+          <span v-else-if="resultScore===allData.degree.middle">中</span>
+          <span v-else>低</span>
+        </div>
+        <div class="testResult_des">
+          <div v-if="resultScore>=allData.degree.high">{{resultData.description.high}}</div>
+          <div v-else-if="resultScore===allData.degree.middle">
+            <div>{{resultData.description.middle}}</div>
+            <div class="addtion">高分說明：{{resultData.description.high}}</div>
+            <div class="addtion">低分說明：{{resultData.description.low}}</div>
+          </div>
+          <div v-else>{{resultData.description.low}}</div>
+
+        </div>
+      </div>
+      <div class="retest">
+        <a href="index.html" class="retest-btn">重新測驗</a>
+      </div>
+    </div>
+    <footer>
+      <p>By Celeste</p>
+      <a href="https://celeste6666.github.io/" style="text-decoration: none;color: black;"><i class="fab fa-github"
+          style="margin-right: 5px;"></i>Celeste's技術儲藏室</a>
+      <p>以上使用圖片僅供學習使用</p>
+      <p>心理測驗為{{allData.editor.name}}所撰寫</p>
+    </footer>
+  </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="all.js"></script>
+</body>
+
+</html>
