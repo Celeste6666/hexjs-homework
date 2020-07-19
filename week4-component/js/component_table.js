@@ -22,7 +22,7 @@ Vue.component('list', {
                 <input type="checkbox" :id="key" :checked="item.enabled" @change="changeChecked(item.id)">
               </td>
               <td>
-                <button type="button" class="btn btn-outline-info" @click="edit(item.id)">編輯</button>
+                <button type="button" class="btn btn-outline-info" @click="edit(item.id)" data-backdrop="false">編輯</button>
                 <button type="button" class="btn btn-outline-success" @click="remove(item.id)">刪除</button>
               </td>
             </tr>
@@ -39,7 +39,7 @@ Vue.component('list', {
       this.$bus.$emit('list-editproduct', product)
     },
     remove(id) {
-      this.$emit('removeproduct', id)
+      this.$emit('list-removeproduct', id)
     },
     changeChecked(ItemId) {
       const index = this.newProducts.findIndex(item => item.id === ItemId);
@@ -54,6 +54,8 @@ Vue.component('list', {
   created() {
     console.log(this.products)
     this.newProducts = JSON.parse(JSON.stringify(this.products));
-    this.$bus.$on('sendProdutData', products => this.newProducts = JSON.parse(JSON.stringify(products)))
+    this.$bus.$on('sendProdutData', products => {
+      this.newProducts = JSON.parse(JSON.stringify(products))
+    })
   }
 })

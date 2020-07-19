@@ -1,12 +1,15 @@
 Vue.component('modal', {
-  props: ['temporary'],
   template: `<div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-labelledby="addProductLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable " style="max-width: 1000px !important;">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="addProductLabel">新增產品</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <h5 class="modal-title" id="addProductLabel">新增/編輯 產品</h5>
+              <button type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              @click="cancel">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -34,13 +37,12 @@ Vue.component('modal', {
                       </div>
                       <div class="d-flex flex-column">
                         <span class="font-weight-bold py-1">產品描述</span>
-                        <textarea class="form-control" cols="30" rows="1" placeholder="永遠缺一支的口紅"
-                          v-model="newTemporary.description"></textarea>
+                        <textarea class="form-control" cols="30" rows="1" placeholder="永遠缺一支的口紅" v-model="newTemporary.options.description"></textarea>
                       </div>
                       <div class="d-flex">
                         <div class="d-flex flex-column mr-1 w-50">
                           <span class="font-weight-bold py-1">數量</span>
-                          <input class="form-control" type="text" placeholder="50" v-model="newTemporary.num">
+                          <input class="form-control" type="text" placeholder="50" v-model="newTemporary.options.totalNum">
                         </div>
                         <div class="d-flex flex-column w-50">
                           <span class="font-weight-bold py-1">單位</span>
@@ -91,7 +93,25 @@ Vue.component('modal', {
       </div>`,
   data() {
     return {
-      newTemporary: {}
+      newTemporary: {
+        id: '',
+        title: '',
+        category: '',
+        description: '在重新串接資料時，會跑不出來，但使用options就不會',
+        content: '',
+        imageUrl: [],
+        enabled: true,
+        origin_price: '',
+        price: '',
+        unit: '',
+        options: {
+          eitor: '',
+          supervisor: '',
+          commet: '',
+          totalNum: '',
+          description: '',
+        }
+      }
     }
   },
   methods: {
@@ -100,17 +120,32 @@ Vue.component('modal', {
       $('#addProduct').modal('toggle')
     },
     cancel() {
-      this.$emit('modal-cancel');
+      this.newTemporary = {
+        id: '',
+        title: '',
+        category: '',
+        description: '',
+        content: '',
+        imageUrl: [],
+        enabled: true,
+        origin_price: '',
+        price: '',
+        unit: '',
+        options: {
+          eitor: '',
+          supervisor: '',
+          commet: '',
+          totalNum: '',
+          description: ''
+        }
+      }
       $('#addProduct').modal('toggle')
     }
   },
-  created() {
-    this.newTemporary = JSON.parse(JSON.stringify(this.temporary))
-  },
+  created() {},
   mounted() {
     this.$bus.$on('list-editproduct', temporary => {
       this.newTemporary = JSON.parse(JSON.stringify(temporary));
-      console.log(this.newTemporary)
       $('#addProduct').modal('toggle')
     });
   }

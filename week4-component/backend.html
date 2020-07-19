@@ -44,17 +44,17 @@
       <div class="container-fluid my-3">
         <div class="newProduct mb-3 d-flex justify-content-end">
           <button type="button" class="btn btn-warning d-flex align-items-center" data-toggle="modal"
-            data-target="#addProduct">
+            data-target="#addProduct" data-backdrop="false">
             <i class="fas fa-plus fa-lg mr-1"></i>
             <span>新增產品</span></button>
         </div>
         <div class="table-responsive-lg mb-3">
-          <list :products="products" @removeproduct="removeProduct" @list-changechecked="changeEnabled"></list>
+          <list :products="products" @list-removeproduct="removeProduct" @list-changechecked="changeEnabled"></list>
         </div>
         <pagination :total_pages="paginations.total_pages" @getcurrentpage="getCurrentPage"></pagination>
       </div>
       <!-- modal -->
-      <modal :temporary="temporary" @modal-cancel="clearEdit"></modal>
+      <modal></modal>
       <footer>
         <a href="https://celeste6666.github.io/" class="text-decoration-none text-warning"><i class="fab fa-github"
             style="margin-right: 5px;"></i>Celeste's技術儲藏室</a>
