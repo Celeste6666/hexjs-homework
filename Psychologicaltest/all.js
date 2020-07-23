@@ -23,7 +23,7 @@ const vm = new Vue({
     getData() {
       const vm = this;
       axios.get('https://raw.githubusercontent.com/hexschool/js-training-task/master/api/BigFive.json').then(res => {
-        vm.allData = res.data;
+        vm.allData = res.data
         //取得人格特質(英文)
         vm.categories = res.data.traits.en;
         vm.problemList = res.data.problemList
@@ -40,7 +40,7 @@ const vm = new Vue({
         });
         //取得localStorage
         vm.getLocalStorage();
-        vm.renderResult('openness')
+        vm.getResult('openness')
       }).catch(error => console.log(error))
     },
     render(index) {
@@ -91,21 +91,32 @@ const vm = new Vue({
       this.localStorageData = JSON.parse(localStorage.getItem('score'))
     },
     //result
-    renderResult(category) {
-      const navs=document.querySelectorAll('.js-nav');
-      navs.forEach(nav=>{
-        if (nav.classList[1] === category){
-          nav.classList.add('active')
-        }else{
-          nav.classList.remove('active')
-        }
-      })
+    getResult(category) {
       this.resultData = this.allData.problemList[category];
       this.resultCategory = category;
       this.resultScore = this.localStorageData[`${category}Total`]
+    },
+    renderResult(category) {
+      const navs = document.querySelectorAll('.js-nav');
+      navs.forEach(nav => {
+        if (nav.classList[1] === category) {
+          nav.classList.add('active')
+        } else {
+          nav.classList.remove('active')
+        }
+      })
     }
   },
   created() {
     this.getData()
+  },
+  mounted() {
+    console.log(document.querySelector('.result_banner-nav'))
+    //<ul v-if="allData.traits">底下元素會是在mounted只是將allData.traits資料帶入並準備開始渲染，所以這時候找不到<li></li>，因為他們還沒被渲染，畫面要一直到生命週期updated()時，才真正全部被渲染完畢(包括v-for下的DOM元素)，這時候才找的到v-for下的DOM元素。
+    console.log(document.querySelector('.result_banner-nav ul'))
+  },
+  updated() {
+    console.log(document.querySelector('.result_banner-nav ul'))
+    this.renderResult(this.resultCategory)
   }
 })

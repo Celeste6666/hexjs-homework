@@ -14,9 +14,10 @@
     <div class="result_banner">
       <nav class="result_banner-nav">
         <span class="logo">Celeste Website</span>
-        <ul>
+        <ul v-if="allData.traits">
           <li v-for="(item,key) in allData.traits.zh" :key="key">
-            <a href="#" @click.prevent="renderResult(allData.traits.en[key])" class="js-nav" :class="allData.traits.en[key]">{{item}}</a>
+            <a href="#" @click.prevent="getResult(allData.traits.en[key])" class="js-nav"
+              :class="allData.traits.en[key]">{{item}}</a>
           </li>
         </ul>
       </nav>
@@ -27,7 +28,7 @@
             <span>{{resultData.name}}</span>
             <span>{{resultCategory}}</span>
           </div>
-          <div class="personality_desc">
+          <div class="personality_desc" v-if="resultData.description">
             {{resultData.description.desc}}
           </div>
         </div>
@@ -35,12 +36,12 @@
     </div>
     <div class="container">
       <div class="testResult">
-        <div class="score">
+        <div class="score" v-if="allData.degree">
           <span v-if="resultScore>=allData.degree.high">高</span>
           <span v-else-if="resultScore===allData.degree.middle">中</span>
           <span v-else>低</span>
         </div>
-        <div class="testResult_des">
+        <div class="testResult_des" v-if="resultData.description">
           <div v-if="resultScore>=allData.degree.high">{{resultData.description.high}}</div>
           <div v-else-if="resultScore===allData.degree.middle">
             <div>{{resultData.description.middle}}</div>
@@ -60,7 +61,7 @@
       <a href="https://celeste6666.github.io/" style="text-decoration: none;color: black;"><i class="fab fa-github"
           style="margin-right: 5px;"></i>Celeste's技術儲藏室</a>
       <p>以上使用圖片僅供學習使用</p>
-      <p>心理測驗為{{allData.editor.name}}所撰寫</p>
+      <p v-if="allData.editor">心理測驗為{{allData.editor.name}}所撰寫</p>
     </footer>
   </div>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

@@ -29,14 +29,23 @@ Vue.component('list', {
           </table>`,
   data() {
     return {
+      apiPath: 'https://course-ec-api.hexschool.io/api/',
+      uuid: '8ef975e4-f1b6-4328-932c-fe911c580ec7',
       newProducts: {}
     }
   },
   methods: {
     edit(id) {
-      const product = this.newProducts.find(item => item.id === id)
+      let product = '';
+      const productPath = `${this.apiPath}${this.uuid}/admin/ec/product/${id}`;
+      const vm = this;
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      //透過patch將目前更改過後temporary的資料傳進去這個產品API中
+      axios.get(productPath).then(res => {
+        product = res.data.data
+        this.$bus.$emit('list-editproduct', product)
+      }).catch(error => console.log(error))
       //modal <=> table
-      this.$bus.$emit('list-editproduct', product)
     },
     remove(id) {
       this.$emit('list-removeproduct', id)

@@ -31,7 +31,11 @@
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-              <select class="custom-select mr-2" id="inputGroupSelect01">
+              <select class="custom-select mr-2" id="view">
+                <option selected>前台</option>
+                <option value="1">後台</option>
+              </select>
+              <select class="custom-select mr-2" id="admin">
                 <option selected>管理員</option>
                 <option value="1">審核人員</option>
               </select>
@@ -52,10 +56,10 @@
         <div class="table-responsive-lg mb-3">
           <list :products="products" @list-removeproduct="removeProduct" @list-changechecked="changeEnabled"></list>
         </div>
-        <pagination :total_pages="paginations.total_pages" @getcurrentpage="getCurrentPage"></pagination>
+        <pagination :paginations="paginations" @pagination-getcurrentpage="getCurrentPageData"></pagination>
       </div>
       <!-- modal -->
-      <modal></modal>
+      <modal @modal-ensure="confirmProduct"></modal>
       <footer>
         <a href="https://celeste6666.github.io/" class="text-decoration-none text-warning"><i class="fab fa-github"
             style="margin-right: 5px;"></i>Celeste's技術儲藏室</a>

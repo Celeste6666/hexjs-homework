@@ -37,7 +37,7 @@ Vue.component('modal', {
                       </div>
                       <div class="d-flex flex-column">
                         <span class="font-weight-bold py-1">產品描述</span>
-                        <textarea class="form-control" cols="30" rows="1" placeholder="永遠缺一支的口紅" v-model="newTemporary.options.description"></textarea>
+                        <input type="text" class="form-control" placeholder="永遠缺一支的口紅" v-model="newTemporary.content">
                       </div>
                       <div class="d-flex">
                         <div class="d-flex flex-column mr-1 w-50">
@@ -63,7 +63,7 @@ Vue.component('modal', {
                       <div class="d-flex flex-column">
                         <span class="font-weight-bold py-1">產品說明</span>
                         <textarea class="form-control" cols="30" rows="3"
-                          placeholder="輕薄不易掉色，顯色度佳，飽和色澤、綿密細緻狂掃世界唇彩排行榜，熱銷全球！" v-model="newTemporary.content"></textarea>
+                          placeholder="輕薄不易掉色，顯色度佳，飽和色澤、綿密細緻狂掃世界唇彩排行榜，熱銷全球！" v-model="newTemporary.description"></textarea>
                       </div>
                       <div class="d-flex flex-column mt-2">
                         <div class="custom-control custom-checkbox">
@@ -116,7 +116,7 @@ Vue.component('modal', {
   },
   methods: {
     confirm() {
-      this.$bus.$emit('modal-ensure', JSON.parse(JSON.stringify(this.newTemporary)));
+      this.$emit('modal-ensure', JSON.parse(JSON.stringify(this.newTemporary)));
       $('#addProduct').modal('toggle')
     },
     cancel() {
