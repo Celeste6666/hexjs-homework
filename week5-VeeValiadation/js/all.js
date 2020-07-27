@@ -68,11 +68,5 @@ new Vue({
   },
   created() {
     this.getData()
-  },
-  beforeUpdate() {
-
-  },
-  updated() {
-
-  },
+  }
 })

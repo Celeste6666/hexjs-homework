@@ -4,7 +4,7 @@
 * 第二週：[API串接](https://celeste6666.github.io/hexjs-homework/week2-API串接/index.html)
 * 第三週：[產品管理頁面](https://celeste6666.github.io/hexjs-homework/week3-Beauty-Player/index.html)
 * 第四週：[Vue component 與 API 串接](https://celeste6666.github.io/hexjs-homework/week4-component/login.html)
-* 第五週：[Vue component 與 API 串接](https://celeste6666.github.io/hexjs-homework/week5-VeeValiadation/index.html)
+* 第五週：[Vue 驗證套件](https://celeste6666.github.io/hexjs-homework/week5-VeeValiadation/index.html)
 
 
 ## 支線任務
