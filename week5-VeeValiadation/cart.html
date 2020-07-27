@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celeste's Beauty Player</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/6e47eb02e6.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./css/all.css">
+</head>
+
+<body>
+  <div id="vm">
+    <loading :active.sync="isLoading" :loader="loader"></loading>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Celeste's Beauty Player</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarNavDropdown">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link btn" href="index.html">首頁</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link btn" href="#">購物車<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0  cart">
+            <button class="ml-2 btn btn-danger my-2 my-sm-0" type="submit">登入</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-5 d-flex flex-column">
+      <button class="btn btn-outline-dark mb-3 align-self-end" @click.prevent="deleteAll">刪除全部品項</button>    
+      <list :cartproducts="cartproducts" @list-cartproducts="getCartData" @list-loading="isLoading=true"></list>
+      <div class="payment">
+        <div class="h3 text-center">付款資訊</div>
+        <validation-observer v-slot="{ invalid }">
+          <form>
+            <div class="form-group">
+              <validation-provider rules="required" v-slot="{ errors, classes }">
+                <label for="buyer">付款人</label>
+                <input type="text" name="buyer" class="form-control" id="buyer" v-model="buyerDetail.buyer" :class="classes">
+                <!-- 錯誤訊息 -->
+                <span  class="invalid-feedback">{{ errors[0] }}</span>
+              </validation-provider>
+            </div>
+            <div class="form-group">
+              <validation-provider rules="required" v-slot="{ errors, classes }">
+                <label for="recipient">收件人</label>
+                <input type="text" name="recipient" class="form-control" id="recipient" v-model="buyerDetail.recipient" :class="classes">
+                <!-- 錯誤訊息 -->
+                <span  class="invalid-feedback">{{ errors[0] }}</span>
+              </validation-provider>
+            </div>
+            <div class="form-group">
+              <validation-provider rules="required|digits:10" v-slot="{ errors, classes }">
+                <label for="buyerTel">電話號碼</label>
+                <input type="tel" name="buyerTel" class="form-control" id="buyerTel" v-model="buyerDetail.buyerTel" :class="classes">
+                <!-- 錯誤訊息 -->
+                <span  class="invalid-feedback">{{ errors[0] }}</span>
+              </validation-provider>
+            </div>
+            <div class="form-group">
+              <validation-provider rules="required|email" v-slot="{ errors, classes }">
+                <label for="buyerEmail">Email</label>
+                <input type="email" name="buyerEmail" class="form-control" id="buyerEmail"
+                  v-model="buyerDetail.buyerEmail" :class="classes">
+                <!-- 錯誤訊息 -->
+                <span  class="invalid-feedback">{{ errors[0] }}</span>
+              </validation-provider>
+            </div>
+            <div class="form-group">
+              <validation-provider rules="required" v-slot="{ errors, classes }">
+                <label for="address">收件地址</label>
+                <input type="text" name="address" class="form-control" id="address" v-model="buyerDetail.address" :class="classes">
+                <!-- 錯誤訊息 -->
+                <span  class="invalid-feedback">{{ errors[0] }}</span>
+              </validation-provider>
+            </div>
+            <div class="form-group">
+              <validation-provider rules="required" v-slot="{ errors, classes }">
+                <label for="paymentway">付款方式</label>
+                <select class="form-control" id="paymentway" v-model="buyerDetail.paymentway" name="paymentway" :class="classes">
+                  <option value="" disabled>請選擇付款方式</option>
+                  <option vlaue="WebATM">WebATM</option>
+                  <option vlaue="ATM">ATM</option>
+                  <option vlaue="Barcode">Barcode</option>
+                  <option vlaue="Credit">Credit</option>
+                  <option vlaue="ApplePay">ApplePay</option>
+                  <option vlaue="GooglePay">GooglePay</option>
+                </select>
+                <span  class="invalid-feedback">{{ errors[0] }}</span>
+              </validation-provider>
+            </div>
+  
+            <div class="form-group">
+              <label for="addtion">備註</label>
+              <textarea class="form-control" id="addtion" rows="3" v-model="buyerDetail.addtion"
+                name="addtion"></textarea>
+            </div>
+  
+            <button type="submit" class="btn btn-primary" :disabled="invalid">確認結帳</button>
+          </form>
+        </validation-observer>
+      </div>
+    </div>
+    <footer class="mt-5 d-flex flex-column align-items-center bg-dark text-white">
+      <a href="https://celeste6666.github.io/" class="text-decoration-none text-warning"><i class="fab fa-github"
+          style="margin-right: 5px;"></i>Celeste's技術儲藏室</a>
+      <span>By Celeste</span>
+      <span>以上使用圖片僅供學習使用</span>
+    </footer>
+
+
+
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+  </script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/3.3.0/vee-validate.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+  <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+  <script src="./js/cart.js" type="module"></script>
+</body>
+
+</html>

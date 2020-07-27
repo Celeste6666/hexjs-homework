@@ -13,6 +13,7 @@
 
 <body>
   <div id="app">
+    <loading :active.sync="isLoading" :loader="loader"></loading>
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Celeste's Beauty Player</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -22,20 +23,20 @@
       <div class="collapse navbar-collapse " id="navbarNavDropdown">
         <div class="container-fluid">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link btn" href="#">首頁</a>
-            </li>
             <li class="nav-item active">
-              <a class="nav-link btn" href="#">產品<span class="sr-only">(current)</span></a>
+              <a class="nav-link btn" href="#">首頁<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn" href="#">聯絡我們</a>
+              <a class="nav-link btn" href="cart.html">購物車</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
+          <form class="form-inline my-2 my-lg-0  cart">
             <button class="ml-2 btn btn-danger my-2 my-sm-0" type="submit">登入</button>
-            <button class="btn btn-outline-warning my-2 my-sm-0 mx-2" type="button"><i
-                class="fas fa-cart-plus"></i></button>
+            <a href="#" class="text-white my-2 my-sm-0 mx-2" @click.prevent="toggleCartDetail">
+              <i class="fas fa-cart-plus fa-2x"></i>
+              <span class="badge badge-pill badge-tomato">{{cartProducts.length}}</span>
+            </a>
+            <cart :cartproducts="cartProducts" :hidden="classList.cartHidden" @cart-cartproducts="getCartData" @cart-loading="isLoading=true"></cart>
           </form>
         </div>
       </div>
@@ -43,32 +44,27 @@
 
     <div class="container-fluid mt-3">
       <div class="row">
-        <div class="col-lg-2">
-          <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action text-center active">cosmetic</a>
-            <a href="#" class="list-group-item list-group-item-action text-center">
-              Care products</a>
+        <div class="col-lg-2 pl-0">
+          <div class="tag px-1 py-2 d-flex justify-content-end mb-1">
+            <span>cosmetic</span>
+          </div>
+          <div class="tag px-1 py-2 d-flex justify-content-end">
+            <span>cloth</span>
           </div>
         </div>
         <div class="col-lg-10">
-          <list :products="products"></list>
-         
+          <list :products="products" @buyproduct="setNewCartItem"></list>
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
+    <pagination :paginations="paginations" @pagination-getcurrentpage="getData"></pagination>
+    <footer class="mt-5 d-flex flex-column align-items-center bg-dark text-white">
+      <a href="https://celeste6666.github.io/" class="text-decoration-none text-warning"><i class="fab fa-github"
+          style="margin-right: 5px;"></i>Celeste's技術儲藏室</a>
+      <span>By Celeste</span>
+      <span>以上使用圖片僅供學習使用</span>
+    </footer>
   </div>
-
-
 
 
 
@@ -84,6 +80,8 @@
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+  <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
   <script src="./js/all.js" type="module"></script>
 </body>
 
